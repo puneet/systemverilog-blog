@@ -1,0 +1,30 @@
+# Dependencies
+markdown:            redcarpet
+highlighter:         pygments
+
+# Permalinks
+#
+# Use of `relative_permalinks` ensures post links from the index work properly.
+permalink:           pretty
+relative_permalinks: true
+
+# Setup
+title:               SystemVerilog
+tagline:             'Zen and the Practice'
+description:         'Something on SystemVerilog. Dedicated to the verification community around the world. Follow us on <a href="https://twitter.com/coverify" target="_blank">@coverify</a>.'
+url:                 http://localhost:4040
+baseurl:             /
+paginate:            5
+
+# About/contact
+author:
+  name:              "Puneet Goel"
+  url:               http://coverify.com
+  email:             puneet@coverify.com
+
+# Site
+github:
+  repo: https://github.com/coverify/systemverilog.net
+
+# Custom vars
+version:             1.0.0
