@@ -14,7 +14,8 @@ title: Home
 
     <span class="post-date">{{ post.date | date_to_string }}</span>
 
-    {{ post.content }}
+    {{ post.content | strip_tags | truncate: 400 }} <a href="{{ post.url }}"> Continue</a>
+    
   </div>
   {% endfor %}
 </div>
