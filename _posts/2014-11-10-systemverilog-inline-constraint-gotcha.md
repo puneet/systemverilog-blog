@@ -31,7 +31,7 @@ class seq extends uvm_sequence#(seq_item);
   task body();
     seq_item trans;
     bit [31:0] addr = 32'h11001100;
-    assert(tr.randomize()
+    assert(trans.randomize()
       with { trans.addr == addr; });
   endtask
 endclass
