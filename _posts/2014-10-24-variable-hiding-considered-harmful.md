@@ -22,17 +22,17 @@ A friend drew my attention to a [poster paper](http://dvcon-india.org/wp-content
 
 At the onset, the paper argues that parameterized classes are often misunderstood and misused and result in classes that can not be related via inheritance. The paper notes:  *Polymorphism is one of the main reasons to use classes*. And that when we deploy parameterized classes, polymorphism is a casualty:
 
-{% highlight systemverilog linenos %}
+{% codeblock lang:systemverilog %}
 class classValue #(int V = 3);
 endclass
 classValue #(3) cV3 = new();
 classValue #(4) cV4 = new();
 cV3 = cV4; // ERROR
-{% endhighlight %}
+{% endcodeblock %}
 
 Ok. So that is expected since the type of `cV3` and that of `cV4` do not match. To retain type compatibility, the paper tells us to rewrite the above code as:
 
-{% highlight systemverilog linenos %}
+{% codeblock lang:systemverilog %}
 class classValue;
   int V = 3;
 endclass
@@ -42,11 +42,11 @@ endclass
 classValue cV = new;
 classValueNew cVN = new;
 cV = cVN;
-{% endhighlight %}
+{% endcodeblock %}
 
 Whoa! It is a classic example of variable hiding. Variable hiding breaks polymorphism, and polymorphism is what we wanted to enable in the first place. Consider:
 
-{% highlight systemverilog linenos %}
+{% codeblock lang:systemverilog %}
 classValue cVN = new;
 classValue cV = cVN;
 
@@ -55,7 +55,7 @@ $display("V is %d", cVN.V);    // prints "V is 4"
 
 if(cV == cVN)
   $display("cV equals cVN");   // prints "cV equals cVN"
-{% endhighlight %}
+{% endcodeblock %}
 
 Though `cV` is the same object as `cVN`, `cV.V` returns a different value compared to `cVN.V`, and would result in a major source of confusion and diffcult to find bugs. The [official java documentation](http://docs.oracle.com/javase/tutorial/java/IandI/hidevariables.html) too discourages such a coding practice.
 
@@ -63,7 +63,7 @@ Now let us consider what could be done to alleviate the situation. To begin with
 
 There is yet another issue that needs consideration. While the class parameters are read-only, the fields that we substituted them with, can be inadvertently modified. To remedy this issue, we can either declare the given field as `const`, or still better, we could make the variable `static const`, thus ensuring that the variable does not take memory space for every object:
 
-{% highlight systemverilog linenos %}
+{% codeblock lang:systemverilog %}
 class classValue;
   static const int V = 3;
 endclass
@@ -73,11 +73,11 @@ endclass
 classValue cV = new;
 classValueNew cVN = new;
 cV = cVN;
-{% endhighlight %}
+{% endcodeblock %}
 
 Alternately we could have coded a virtual function that returns the value:
 
-{% highlight systemverilog linenos %}
+{% codeblock lang:systemverilog %}
 class classValue;
   virtual function int V(); return 3; endfunction
 endclass
@@ -87,6 +87,6 @@ endclass
 classValue cV = new;
 classValueNew cVN = new;
 cV = cVN;
-{% endhighlight %}
+{% endcodeblock %}
 
 The virtual function so declared can be accessed publicly, but that is fine since the function exhibits polymorphic characteristic.
