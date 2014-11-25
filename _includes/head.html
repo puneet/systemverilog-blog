@@ -24,8 +24,39 @@
   {% endif %}
 
   <!-- CSS -->
-  <link rel="stylesheet" href="{{ site.baseurl }}assets/css/main.css">
+  <!-- <link rel="stylesheet" href="{{ site.baseurl }}assets/css/main.css"> -->
+  <link href="{{root_url}}/{% css_asset_tag global %}
+- /assets/css/main.scss
+{% endcss_asset_tag %}" rel="stylesheet" type='text/css' />
   <!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400"> -->
+
+  <script type="text/javascript">
+
+    filename = "{{root_url}}/{% javascript_asset_tag global %}
+    -  /assets/js/jquery-2.1.1.js
+    -  /assets/js/libs/ZeroClipboard.js
+    -  /assets/js/analytics.js
+    -  /assets/js/codebuttons.js
+    -  /assets/js/modernizr-2.0.js
+    -  /assets/js/bootstrap.min.js
+    -  /assets/js/octopress.js
+    {% endjavascript_asset_tag %}"
+
+    // Add a script element as a child of the body
+    function downloadJSAtOnload() {
+    var element = document.createElement("script");
+    element.src = filename;
+    document.body.appendChild(element);
+    }
+
+    // Check for browser support of event handling capability
+    if (window.addEventListener)
+    window.addEventListener("load", downloadJSAtOnload, false);
+    else if (window.attachEvent)
+    window.attachEvent("onload", downloadJSAtOnload);
+    else window.onload = downloadJSAtOnload;
+
+  </script>
 
   <!-- Icons -->
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ site.baseurl }}assets/icons/apple-touch-icon-precomposed.png">
