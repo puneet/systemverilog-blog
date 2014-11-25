@@ -28,15 +28,14 @@ class seq extends uvm_sequence#(seq_item);
   task body();
     seq_item trans;
     bit [31:0] addr = 32'h11001100;
-    assert(trans.randomize()
-      with { trans.addr == addr; });
+    assert(trans.randomize() with { trans.addr == addr; });
   endtask
 endclass
 {% endcodeblock %}
 
-Surprisingly! The above code generates address 'hbfdf5196' in my case.
+The above code generated a transaction with `addr` as `hbfdf5196`. What did the solver do with the inline `this.addr == addr` constraint?
 
-The problem arises when you try to make `seq_item` address equal to the address in the calling sequence class using the above in-line constraint. The result is undesirable since the constraint will  actually cause the `seq_item` address (trans.addr) to be equal to itself. This gotcha in SystemVerilog arises because we have addr as a variable defined in both `seq_item` class as well as the `seq` class. SystemVerilog scoping rules pick the variable which is part of the object being randomized.
+The problem arises when you try to make `seq_item` address equal to the address in the calling sequence class using the above in-line constraint. The result is undesirable since the constraint will  actually cause the `seq_item` address (trans.addr) to be equal to itself. This gotcha in SystemVerilog arises because we have `addr` as a variable defined in both `seq_item` class as well as the `seq` class. SystemVerilog scoping rules pick the variable which is part of the object being randomized.
 
 The SystemVerilog P1800-2012 LRM (see page 495) states that:
 
@@ -45,7 +44,7 @@ The SystemVerilog P1800-2012 LRM (see page 495) states that:
 > randomize() with object class followed by a search of the
 > scope containing the method call—the local scope.
 
-In order to overcome the above problem we can prefix "local::" before the address of sequence class `seq`. Thus, we could modify the code as:
+In order to overcome the above problem we can prefix `local::` before the address of sequence class `seq`. Thus, we could modify the code as:
 
 {% codeblock lang:systemverilog %}
 // Sequence item class
@@ -76,4 +75,4 @@ The above code generates the following address:
 
 ```
 
-This statement makes sure that the constraint solver looks for the address following the local:: only in the local scope (i.e. the address in the sequence class "seq"). So, now the constraint will be the desired one which states that while randoming the address of `seq_item`, the constraint solver should make sure that the address of the seq_item should be equal to the address in the sequence `seq`.
+This statement makes sure that the constraint solver looks for the address following the local:: only in the local scope (i.e. the address in the sequence class `seq`). So, now the constraint will be the desired one which states that while randoming the address of `seq_item`, the constraint solver should make sure that the address of the seq_item should be equal to the address in the sequence `seq`.
