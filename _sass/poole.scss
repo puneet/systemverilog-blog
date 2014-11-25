@@ -41,10 +41,11 @@
           box-sizing: border-box;
 }
 
-html,
-body {
-  margin: 0;
-  padding: 0;
+html, body {
+   font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+   font-size: 16px;
+   margin: 0;
+   padding: 0;
 }
 
 html {
@@ -147,6 +148,69 @@ abbr[title] {
   border-bottom: 1px dotted #e5e5e5;
 }
 
+#overlay {
+   position: fixed;
+   top: 0;
+   left: 0;
+   bottom: 0;
+   right: 0;
+   padding: 32px;
+   overflow: auto;
+   background-color: rgba(0,0,0,.7);
+   z-index: 10000;
+}
+
+#overlay .code-buttons {
+   margin-top: 20px;
+}
+
+.code-buttons > .nav-tabs > li.pull-right > .code-button {
+   font-size: 14px;
+}
+
+.code-button .fa {
+   margin-right: 0.5em;
+   margin-left: -0.5em;
+}
+
+pre code {
+   white-space: pre;
+}
+
+figure.code {
+   margin: 0 0 1.5em;
+}
+
+figure.code.expanded {
+   position: fixed;
+   top:0;
+   left:0;
+   padding:60px 40px 40px 40px;
+   margin: 0;
+   z-index:100000;
+}
+
+.code-buttons {
+   margin: 0 0px;
+}
+
+.code-buttons > .nav-tabs { border-bottom: 0px }
+
+.code-buttons > .nav-tabs > li > .code-button {
+   padding-top:5px;
+   padding-bottom:2px;
+   border:1px solid #EEE;
+   background-color:white;
+   font-size:12px;
+   color: #3771C8;
+
+}
+
+.code-buttons > .nav-tabs > li .code-button:hover, .code-buttons > .nav-tabs > li .code-button.hover { 
+   cursor: pointer;
+   background-color: #eee;
+}
+
 /* Code */
 code,
 pre {
@@ -167,7 +231,6 @@ pre {
   font-size: 1rem;
   line-height: 1.4;
   white-space: pre;
-  white-space: pre-wrap;
   word-break: break-all;
   word-wrap: break-word;
   background-color: #f9f9f9;
@@ -236,13 +299,13 @@ img {
 
 /* Tables */
 table {
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
   width: 100%;
   border: 1px solid #e5e5e5;
   border-collapse: collapse;
 }
-td,
-th {
+td:not([class]),
+th:not([class]) {
   padding: .25rem .5rem;
   border: 1px solid #e5e5e5;
 }
