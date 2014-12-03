@@ -2,10 +2,14 @@
 layout: post
 author: ritu_goel
 title: Passing the buck to a thread
-excerpt: ""
 modified: 2014-11-22
 tags: [systemverilog, fork-join, variable passing, UVM]
 comments: true
+excerpt: "Hardware is concurrent by nature. And so are testbenches.
+
+In context of UVM, the `run_phase` of each testbench component, executes concurrently with other components. Forking a separate thread for each `uvm_component` is handled by the UVM base class library; the user does not have to explicitly invoke fork.
+
+There are other situations however"
 ---
 
 Hardware is concurrent by nature. And so are testbenches.
