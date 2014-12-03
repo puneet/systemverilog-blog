@@ -26,7 +26,6 @@ So far so good. But we need to tell each of the spawned threads, as to which por
 
 {% codeblock lang:systemverilog %}
 for(int index=0; index != ingress_ports.size(); ++index) begin
-   $display("simulation done");
    fork
       begin
 	 $display("Starting thread %0d at time %2t", index, $time);
