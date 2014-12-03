@@ -9,7 +9,7 @@ excerpt: "Hardware is concurrent by nature. And so are testbenches.
 
 In context of UVM, the `run_phase` of each testbench component, executes concurrently with other components. Forking a separate thread for each `uvm_component` is handled by the UVM base class library; the user does not have to explicitly invoke fork.
 
-There are other situations however"
+There are other situations however (*eg a virtual sequence*), where you might be required to spawn a thread explicitly."
 ---
 
 Hardware is concurrent by nature. And so are testbenches.
