@@ -128,7 +128,7 @@ VSIM 1> run -all
 
 ## Localised fork variable
 
-The same result can also be achieved by declaring a localized variable in the *declarative region* of the `fork .. join_none` block. The declarative region starts right below the keyword `fork` (and the optional label it might have). Any declaration made here results in allocation of storage for the variables declared. The allocation happens each time the `fork` statement is encountered at runtime. Any assignments made in this region is executed immediately when the `fork` is encountered. As a result our local variable `_index` gets the right value of the `index` as the `for` loop executes. The keyword `automatic` can be omitted if we are already inside a `class` body.
+The same result can also be achieved by declaring a localized variable in the *declarative region* of the `fork .. join_none` block. The declarative region starts right below the keyword `fork` (and the optional label it might have). Any declaration made here results in allocation of storage for the variables declared. The allocation happens each time the `fork` statement is encountered at runtime. Any assignments made in this region is executed immediately when the `fork` is encountered. As a result our local variable `_index` gets the right value of the `index` as the `for` loop executes. The keyword `automatic` can be omitted if we are already inside a `class` scope.
 
 {% codeblock lang:systemverilog %}
 for(int index=0; index != ingress_ports.size(); ++index) begin
