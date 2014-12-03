@@ -16,7 +16,7 @@ title:               SystemVerilog
 tagline:             'Zen and the Practice'
 description:         'Something on SystemVerilog. Dedicated to the verification community around the world. Follow us on <a href="https://twitter.com/coverify" target="_blank">@coverify</a>.'
 url:                 http://localhost:4040
-baseurl:             /
+baseurl:             http://systemverilog.com
 paginate:            5
 
 # About/contact
